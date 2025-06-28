@@ -22,17 +22,20 @@ instalacao_Paddle_LLM(){
     cd JP_Paddle_OCR/
     bash install.sh
     cd ..
+    rm -rf JP_Paddle_OCR/PaddleOCR/images
     sleep 10
     clear
     cd LLM_Gladiator/
     bash install.sh
     cd ..
+    rm -rf LLM_Gladiator/LLM_Gladiator/images
     sleep 10
-    clear
+    clear 
+    mkdir images
+    ln -s "$(pwd)/images" LLM_Gladiator/LLM_Gladiator/images
+    ln -s "$(pwd)/images" JP_Paddle_OCR/PaddleOCR/images
     echo "A instalação do PaddleOCR e LLM_Gladiator foi realizada!"
-    echo "Para executar a opção 2 por favor verefique se:"
-    echo "Inseriu as imagens no diretório: JP_Paddle__OCR/PaddleOCR/OCRDatabase"
-    echo "Inseriu as imagens no diretório: LLM_Gladiator/LLM_Gladiator/images"
+    echo "Insira suas as imagens na pasta images (ela é um link simbólico para ambos os projetos)"
     echo "Coloque seu arquivo .env no diretório: LLM_Gladiator/LLM_Gladiator"
     sleep 10
 }
@@ -69,6 +72,11 @@ executar_modelos(){
     sleep 10
     clear
     popd
+    
+    mkdir Resultados
+    cp LLM_Gladiator/LLM_Gladiator/resultados_limpos/* Resultados/
+    cp JP_Paddle_OCR/PaddleOCR/Resultados_OCR/* Resultados/
+    cp JP_Paddle_OCR/PaddleOCR/Saida_Processada/* Resultados/
 }
 
 while true; do
